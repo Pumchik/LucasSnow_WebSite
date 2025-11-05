@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="wrap">
     <header class="header">
       <div class="brand">Snow Adventures</div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Primary navigation">
         <ul>
           <li><a href="../index.html">Home</a></li>
           <li><a href="../destinations.html">Destinations</a></li>
@@ -21,9 +22,9 @@
         </ul>
       </nav>
     </header>
-    <main>
+    <main id="main" tabindex="-1">
       <section class="section about-hero">
-        <div class="hero-media"><span>[ Lucas Snow — image placeholder ]</span></div>
+        <div class="hero-media" role="img" aria-label="Portrait placeholder of Lucas Snow"><span>[ Lucas Snow — image placeholder ]</span></div>
         <div class="hero-copy">
           <h1>Chasing adventure through every snow-covered peak.</h1>
         </div>
@@ -52,15 +53,16 @@
           <li>[ icon ] Small friendly groups led by expert guides</li>
           <li>[ icon ] Genuine love for adventure and discovery</li>
         </ul>
-        <div class="decor"><span></span><span></span></div>
+        <div class="decor" aria-hidden="true"><span></span><span></span></div>
       </section>
     </main>
-    <footer class="footer">
-      <div class="dots"><span></span><span></span><span></span></div>
+    <footer class="footer" role="contentinfo">
+      <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
     </footer>
   </div>
 </body>
 </html>
+
 
 
 
