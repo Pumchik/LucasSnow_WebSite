@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="wrap">
 
     <header class="header">
       <div class="brand">Snow Adventures</div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Primary navigation">
         <ul>
           <li><a href="../index.html">Home</a></li>
           <li><a href="../destinations.html">Destinations</a></li>
@@ -23,7 +24,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main" tabindex="-1">
       <section class="section">
         <div class="contact-hero">
           <h1>Contact Us</h1>
@@ -77,7 +78,7 @@
               <li><strong>Social:</strong> [ IG ]  [ FB ]  [ X ]</li>
             </ul>
 
-            <div class="map"><span>MAP / IMAGE</span></div>
+            <div class="map"  role="img" aria-label="Map placeholder showing Snow Adventures office location"><span>MAP / IMAGE</span></div>
 
             <div class="features-mini">
               <ul>
@@ -85,7 +86,7 @@
                 <li>[ icon ] Expert Guides</li>
                 <li>[ icon ] Gear Included</li>
               </ul>
-              <div class="decor"><span></span><span></span></div>
+              <div class="decor" aria-hidden="true"><span></span><span></span></div>
             </div>
           </aside>
 
@@ -93,13 +94,14 @@
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="dots"><span></span><span></span><span></span></div>
+    <footer class="footer" role="contentinfo">
+      <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
     </footer>
 
   </div>
 </body>
 </html>
+
 
 
 
