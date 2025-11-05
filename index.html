@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="wrap">
     <header class="header">
       <div class="brand">Snow Adventures</div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Primary navigation">
         <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="destinations.html">Destinations</a></li>
@@ -21,9 +22,9 @@
         </ul>
       </nav>
     </header>
-    <main>
+    <main id="main">
       <section class="hero">
-        <div class="hero-media"><span>IMAGE</span></div>
+        <div class="hero-media" role="img" aria-label="Snowy mountains — hero image placeholder"><span>IMAGE</span></div>
         <div class="hero-copy">
           <h1>Thrilling Snow Adventures</h1>
           <div class="btn-group">
@@ -47,7 +48,7 @@
             <div class="thumb">[ icon/image ]</div>
             <div class="title">Japan Trails</div>
           </a>
-          <aside class="features">
+          <aside class="features" aria-hidden="true">
             <ul>
               <li>[ icon ] Safe Trips</li>
               <li>[ icon ] Expert Guides</li>
@@ -61,11 +62,12 @@
         </div>
       </section>
     </main>
-    <footer class="footer">
-      <div class="dots"><span></span><span></span><span></span></div>
+    <footer class="footer" role="contentinfo">
+      <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
     </footer>
   </div>
 </body>
 </html>
+
 
 
