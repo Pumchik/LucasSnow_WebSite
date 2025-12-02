@@ -27,37 +27,75 @@
       <section class="section">
         <div class="contact-hero">
           <h1>Contact Us</h1>
+          <p class="form-help" id="form-help">
+            Please fill in the form below. All fields are required.  
+            We use clear on-screen error messages that work well with screen readers.
+          </p>
         </div>
       </section>
       <section class="section">
         <div class="contact-grid">
           <div class="contact-form box">
             <h2>Send a Message</h2>
-            <form action="#" method="post" class="form">
-              <div class="form-row two">
+            <div id="form-status" class="form-status" aria-live="polite"></div>
+            <form id="contact-form" class="form" action="#" method="post" novalidate aria-describedby="form-help">
+              <div class="form-row">
                 <div class="field">
-                  <label for="name">Full Name</label>
-                  <input id="name" name="name" type="text" required>
-                </div>
-                <div class="field">
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" required>
+                  <label for="name">Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                  />
+                  <span class="error-message" id="name-error"></span>
                 </div>
               </div>
               <div class="form-row">
                 <div class="field">
-                  <label for="subject">Subject</label>
-                  <input id="subject" name="subject" type="text">
+                  <label for="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="error-message" id="email-error"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputmode="tel"
+                    pattern="^[0-9+()\\s-]{7,}$"
+                    required
+                  />
+                  <span class="field-note">
+                    Use digits, spaces, +, - or brackets. Example: +353 85 123 4567
+                  </span>
+                  <span class="error-message" id="phone-error"></span>
                 </div>
               </div>
               <div class="form-row">
                 <div class="field">
                   <label for="message">Message</label>
-                  <textarea id="message" name="message" rows="6"></textarea>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                  ></textarea>
+                  <span class="error-message" id="message-error"></span>
                 </div>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn">Send</button>
+                <button type="submit" class="btn">Send message</button>
               </div>
             </form>
           </div>
@@ -71,7 +109,9 @@
               <li><strong>💬 Social:</strong> Instagram | Facebook | Twitter</li>
             </ul>
             <div class="map" role="img" aria-label="Map showing Snow Adventures office location">
-              <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=300&fit=crop" alt="Mountain location map" style="width:100%; height:100%; object-fit:cover;" />
+              <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=300&fit=crop"
+                   alt="Mountain location map"
+                   style="width:100%; height:100%; object-fit:cover;" />
             </div>
             <div class="features-mini">
               <ul>
@@ -89,5 +129,74 @@
       <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
     </footer>
   </div>
+  <script>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+      function clearErrors() {
+        status.textContent = '';
+        status.classList.remove('form-status--error', 'form-status--success');
+        const fields = form.querySelectorAll('[aria-invalid="true"]');
+        fields.forEach(field => {
+          field.removeAttribute('aria-invalid');
+          field.removeAttribute('aria-describedby');
+        });
+        const messages = form.querySelectorAll('.error-message');
+        messages.forEach(msg => msg.textContent = '');
+      }
+      function setError(field, message) {
+        const errorSpan = document.getElementById(field.id + '-error');
+        if (errorSpan) {
+          errorSpan.textContent = '⚠ ' + message;
+        }
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', field.id + '-error');
+      }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        clearErrors();
+        let firstInvalid = null;
+        const name = form.elements.name;
+        const email = form.elements.email;
+        const phone = form.elements.phone;
+        const message = form.elements.message;
+        if (!name.value.trim()) {
+          setError(name, 'Please enter your name.');
+          firstInvalid = firstInvalid || name;
+        }
+        const emailValue = email.value.trim();
+        const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        if (!emailValue) {
+          setError(email, 'Please enter your email address.');
+          firstInvalid = firstInvalid || email;
+        } else if (!emailPattern.test(emailValue)) {
+          setError(email, 'Please enter a valid email address (for example: you@example.com).');
+          firstInvalid = firstInvalid || email;
+        }
+        const phoneValue = phone.value.trim();
+        const phonePattern = /^[0-9+()\\s-]{7,}$/;
+        if (!phoneValue) {
+          setError(phone, 'Please enter your phone number.');
+          firstInvalid = firstInvalid || phone;
+        } else if (!phonePattern.test(phoneValue)) {
+          setError(phone, 'Phone number should contain at least 7 digits and may include +, spaces, - or brackets.');
+          firstInvalid = firstInvalid || phone;
+        }
+        if (!message.value.trim()) {
+          setError(message, 'Please add a short message about your inquiry.');
+          firstInvalid = firstInvalid || message;
+        }
+        if (firstInvalid) {
+          status.textContent = 'There are some problems with your form. Please review the fields below.';
+          status.classList.add('form-status--error');
+          firstInvalid.focus();
+          return;
+        }
+        status.textContent = 'Thank you! Your message is ready to be sent. (Demo form – no email will be sent.)';
+        status.classList.add('form-status--success');
+        form.reset();
+      });
+    })();
+  </script>
 </body>
 </html>
