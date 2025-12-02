@@ -930,4 +930,44 @@ body {
 }
 
 
+.form-help {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.field-note {
+  display: block;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  color: #444;
+}
+
+.error-message {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+[aria-invalid="true"] {
+  border-color: #b00020;
+  box-shadow: 3px 3px 0 #b00020;
+}
+
+.form-status {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.form-status--error {
+  color: #b00020;
+  font-weight: 700;
+}
+
+.form-status--success {
+  color: #006400;
+  font-weight: 700;
+}
+
 
